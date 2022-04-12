@@ -1,0 +1,2 @@
+# Dependencies needed to run this project
+requests
