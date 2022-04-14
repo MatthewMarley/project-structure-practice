@@ -24,7 +24,7 @@
 
 # First target is to run the app (no pre-reqs). Can be run with `make run`
 run:
-	python app.py
+  python app.py
 
 # Setup target depends on requirements.txt. 
 # When this file changes, the dependencies are refreshed by running `pip install -r`
