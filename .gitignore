@@ -2,5 +2,5 @@
 __pycache__
 
 # Environments
-.venv
+# .venv  -> No .venv files in project so no need to exclude
 venv/

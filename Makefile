@@ -1,10 +1,10 @@
 # Structure of Makefile
 
 # target: pre-req1 pre-req2 pre-req3 ...
-#     recipes
+  # recipes
 
 # target -> the goal we want to achieve 
-    # (usually a file that needs to be created during the build)
+  # (usually a file that needs to be created during the build)
 
 # Prerequisites -> Which files this target depends on
 
@@ -22,15 +22,26 @@
 # Note: As we are using Powershell we download choco first, then run
 # choco install make
 
-# First target is to run the app (no pre-reqs). Can be run with `make run`
-run:
-  python app.py
+# If venv doesn't exist it creates it, then installs dependencies via requirements.txt
+# If venv exists but requirements.txt has changed it'll rebuild env + dependencies
+# If venv exists and requirements.txt is unchanged, app.py will run immediately
 
-# Setup target depends on requirements.txt. 
-# When this file changes, the dependencies are refreshed by running `pip install -r`
-setup: requirements.txt
-  pip install -r requirements.txt
+# Pre-requisite must be completed first so target `venv/Scripts/activate` runs first
+run: venv/Scripts/activate
+	./venv/Scripts/python app.py
+
+# Create virtual env, then run requirements.txt inside to download dependencies
+venv/Scripts/activate: requirements.txt
+	python -m venv venv
+	./venv/Scripts/pip install -r requirements.txt
 
 # Clean up pycache folder
-clean:
-  rm -rf __pycache__
+# clean:
+#	Remove-Item ./__pycache__
+#	Remove-Item venv
+
+
+
+
+
+
