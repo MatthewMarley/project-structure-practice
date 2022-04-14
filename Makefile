@@ -40,10 +40,12 @@ $(VENV)/Scripts/activate: requirements.txt
 	python -m venv $(VENV)
 	$(PIP) install -r requirements.txt
 
-# Clean up pycache folder
-# clean:
-#	Remove-Item ./__pycache__
-#	Remove-Item $(VENV)
+# Clean up pycache folder. 
+# /Q -> Quiet mode (not asked if ok to delete files)
+# /S -> Run command on all files in any folder under selected structure
+clean:
+	rmdir /Q /S __pycache__
+	rmdir /Q /S $(VENV)
 
 
 
