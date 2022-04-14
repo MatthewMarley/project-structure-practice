@@ -26,19 +26,24 @@
 # If venv exists but requirements.txt has changed it'll rebuild env + dependencies
 # If venv exists and requirements.txt is unchanged, app.py will run immediately
 
+
+VENV = venv
+PYTHON = $(VENV)/Scripts/python
+PIP = $(VENV)/Scripts/pip
+
 # Pre-requisite must be completed first so target `venv/Scripts/activate` runs first
-run: venv/Scripts/activate
-	./venv/Scripts/python app.py
+run: $(VENV)/Scripts/activate
+	$(PYTHON) app.py
 
 # Create virtual env, then run requirements.txt inside to download dependencies
-venv/Scripts/activate: requirements.txt
-	python -m venv venv
-	./venv/Scripts/pip install -r requirements.txt
+$(VENV)/Scripts/activate: requirements.txt
+	python -m venv $(VENV)
+	$(PIP) install -r requirements.txt
 
 # Clean up pycache folder
 # clean:
 #	Remove-Item ./__pycache__
-#	Remove-Item venv
+#	Remove-Item $(VENV)
 
 
 
